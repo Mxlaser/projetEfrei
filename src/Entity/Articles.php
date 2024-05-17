@@ -20,11 +20,11 @@ class Articles
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_creation = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $date_creation = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_modification = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $date_modification = null;
 
     public function getId(): ?int
     {
@@ -55,24 +55,24 @@ class Articles
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getDateCreation(): ?\DateTimeImmutable
     {
         return $this->date_creation;
     }
 
-    public function setDateCreation(\DateTimeInterface $date_creation): static
+    public function setDateCreation(\DateTimeImmutable $date_creation): static
     {
         $this->date_creation = $date_creation;
 
         return $this;
     }
 
-    public function getDateModification(): ?\DateTimeInterface
+    public function getDateModification(): ?\DateTimeImmutable
     {
         return $this->date_modification;
     }
 
-    public function setDateModification(\DateTimeInterface $date_modification): static
+    public function setDateModification(\DateTimeImmutable $date_modification): static
     {
         $this->date_modification = $date_modification;
 

@@ -1,3 +1,4 @@
+{# articles.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block body %}
@@ -7,8 +8,8 @@
         {% for articles in article %}
             <div class="card mb-3">
                 <div class="card-body">
-                    <h2 class="card-title">{{ articles.titre }}</h2>
-                    <p class="card-text">{{ articles.description }}</p>
+                    <h2 class="card-title">{{ article.titre }}</h2>
+                    <p class="card-text">{{ article.description }}</p>
                 </div>
             </div>
         {% else %}

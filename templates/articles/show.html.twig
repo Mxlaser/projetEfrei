@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <section class="py-5 container">
+        <h1>Liste des Articles</h1>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">{{ article.titre }}</h2>
+                    <p class="card-text">{{ article.description }}</p>
+                </div>
+            </div>        
+    </section>
+{% endblock %}
