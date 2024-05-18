@@ -28,11 +28,11 @@ class Articles
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $date_modification = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?User $user = null;
-
     #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'articles')]
     private Collection $categories;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -92,18 +92,6 @@ class Articles
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Categories>
      */
@@ -124,6 +112,18 @@ class Articles
     public function removeCategory(Categories $category): static
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
