@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Articles{% endblock %}
+
 {% block body %}
     <section class="py-5 container">
         <h1>Liste des Articles</h1>
@@ -9,6 +11,7 @@
                 <div class="card-body">
                     <h2 class="card-title">{{ articles.titre }}</h2>
                     <p class="card-text">{{ articles.description }}</p>
+                    <a href="{{ path ('articles_show', {id: articles.id})}}">Lire article</a>
                 </div>
             </div>
         {% else %}

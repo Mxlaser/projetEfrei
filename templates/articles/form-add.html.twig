@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Ajouter Article{% endblock %}
+
 {% block body %}
     <section class="py-5 container">
         <h1>Ajouter un article</h1>
+        
         {{form_start(formArticle)}}
             {{ form_row(formArticle.titre) }}<br>
             {{ form_row(formArticle.description) }}<br>

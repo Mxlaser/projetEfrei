@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Role;
 use App\Form\RegistrationFormType;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
