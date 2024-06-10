@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Repository\RoleRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,8 +16,22 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegistrationFormType extends AbstractType
 {
+    private $roleRepository;
+
+    public function __construct(RoleRepository $roleRepository)
+    {
+        $this->roleRepository = $roleRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $roles = $this->roleRepository->findAll();
+
+        $choices = [];
+        foreach ($roles as $role) {
+            $choices[$role->getNomRole()] = $role;
+        }
+
         $builder
             ->add('nom')
             ->add('prenom')
@@ -36,6 +52,11 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('role', ChoiceType::class, [
+                'choices' => $choices,
+                'multiple' => false, // Permet à l'utilisateur de sélectionner un seul rôle
+                'expanded' => false, // Affiche les rôles comme des cases à cocher plutôt qu'une liste déroulante
             ]);
     }
 

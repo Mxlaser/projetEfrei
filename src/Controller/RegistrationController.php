@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Role;
 use App\Form\RegistrationFormType;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +17,12 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+
+        // $users = $this->getUser();
+        // if (!$users instanceof User || !$users->hasRole('Administrateur')) {
+        //     return $this->redirectToRoute('app_home');
+        // }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
