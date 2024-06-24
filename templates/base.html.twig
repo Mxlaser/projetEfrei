@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Blog Films{% endblock %}</title>
+    <title>{% block title %}CinéCritique{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset ('css/style.css') }}">
 </head>
 <body>
 
 <header>
-    <h1>Blog Films</h1>
+    <h1>CinéCritique</h1>
     <nav>
         <ul>
             <li><a href="{{ path ('app_home') }}">Accueil</a></li>
@@ -24,7 +24,7 @@
 {% block body %}{% endblock %}
 
 <footer>
-    <p>&copy; 2024 Blog Films. Tous droits réservés.</p>
+    <p>&copy; 2024 CinéCritique. <a href="{{ path ('app_droits') }}">Tous droits réservés.</a></p>
 </footer>
 
 </body>
