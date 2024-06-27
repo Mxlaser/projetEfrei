@@ -6,15 +6,25 @@
     <section class="hero">
         <h2>Gestion du profil</h2>
 
-        {% for users in user %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">{{ users.nom }}</h2>
-                    <p class="card-text">{{ users.prenom }}</p>
-                </div>
-            </div>
+        {% if user is not empty %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for users in user %}
+                        <tr>
+                            <td>{{ users.nom }}</td>
+                            <td>{{ users.prenom }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         {% else %}
-            <p>Aucun article trouvé.</p>
-        {% endfor %}
+            <p>Aucun utilisateur trouvé.</p>
+        {% endif %}
     </section>
 {% endblock %}

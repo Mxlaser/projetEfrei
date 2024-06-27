@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
+use App\Entity\User;
 use App\Form\ArticlesType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,10 @@ class ArticlesController extends AbstractController
     #[Route('/articles', name: 'app_articles')]
     public function index(ManagerRegistry $doctrine): Response
     {
+        $user = $this->getUser();
+        if (!$user instanceof User || (!$user->hasRole('ADMIN')) && !$user->hasRole('USER')) {
+            return $this->redirectToRoute('app_login');
+        }
         $article = $doctrine->getRepository(Articles::class)->findAll();
         return $this->render('articles/articles.html.twig', [
             'article' => $article,
@@ -24,6 +29,10 @@ class ArticlesController extends AbstractController
     #[Route('/article/add', name: 'article_add')]
     public function add(ManagerRegistry $doctrine,  Request $request)
     {
+        $user = $this->getUser();
+        if (!$user instanceof User || (!$user->hasRole('ADMIN')) && !$user->hasRole('USER')) {
+            return $this->redirectToRoute('app_login');
+        }
         $entityManager = $doctrine->getManager();
         $article = new Articles();
 
