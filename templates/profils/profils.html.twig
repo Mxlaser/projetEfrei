@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CinéCritique{% endblock %}
+
+{% block body %}
+    <section class="hero">
+        <h2>Gestion du profil</h2>
+
+        {% for users in user %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">{{ users.nom }}</h2>
+                    <p class="card-text">{{ users.prenom }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun article trouvé.</p>
+        {% endfor %}
+    </section>
+{% endblock %}

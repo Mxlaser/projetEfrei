@@ -119,3 +119,17 @@ form input[type="password"] {
     color: #dc3545;
     margin-top: 5px;
 }
+
+
+/*Responsive*/
+
+@media (max-width: 768px) {
+    body {
+      width: 100%;
+      padding: 10px;
+    }
+}
+
+
+
+

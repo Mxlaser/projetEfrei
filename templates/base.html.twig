@@ -15,8 +15,16 @@
             <li><a href="{{ path ('app_home') }}">Accueil</a></li>
             <li><a href="{{ path ('app_articles') }}">Articles</a></li>
             <li><a href="{{ path ('article_add') }}">Ajouter un article</a></li>
-            <li><a href="{{ path ('app_login') }}">Connexion</a></li>
-            <li><a href="{{ path ('app_register') }}">Inscription</a></li>
+            {% if app.user is null %}
+                <li><a href="{{ path ('app_login') }}">Connexion</a></li>
+                <li><a href="{{ path ('app_register') }}">Inscription</a></li>
+            {% endif %}
+            {% if app.user is not null and app.user.role is not null and (app.user.role.nomRole == 'ADMIN') %}
+                <li><a href="{{ path ('app_profils') }}">Voir profil</a></li>
+            {% endif %}
+            {% if app.user is not null %}
+                <li><a href="{{ path ('app_logout') }}">Deconnexion</a></li>
+            {% endif %}
         </ul>
     </nav>
 </header>
