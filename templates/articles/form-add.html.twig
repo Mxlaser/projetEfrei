@@ -3,13 +3,12 @@
 {% block title %}Ajouter Article{% endblock %}
 
 {% block body %}
-    <section class="py-5 container">
+    <section class="py-5 container article-add">
         <h1>Ajouter un article</h1>
-        
-        {{form_start(formArticle)}}
+        {{ form_start(formArticle) }}
             {{ form_row(formArticle.titre) }}<br>
             {{ form_row(formArticle.description) }}<br>
             <input type="submit" value="Enregistrer" class="btn btn-sm btn-success">
-        {{form_end(formArticle)}}
+        {{ form_end(formArticle) }}
     </section>
 {% endblock %}

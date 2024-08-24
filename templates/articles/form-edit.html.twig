@@ -3,19 +3,12 @@
 {% block title %}Editer Article{% endblock %}
 
 {% block body %}
-    <section class="py-5 container">
-        <h1>Liste des Articles</h1>
-        
-        {% for articles in article %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">{{ article.titre }}</h2>
-                    <p class="card-text">{{ article.description }}</p>
-                </div>
-            </div>
-        {% else %}
-            <p>Aucun article trouvé.</p>
-        {% endfor %}
-        
+    <section class="py-5 container article-edit">
+        <h1>Modifier un article</h1>
+        {{ form_start(formArticle) }}
+            {{ form_row(formArticle.titre) }}
+            {{ form_row(formArticle.description) }}
+            <input type="submit" value="Enregistrer les modifications" class="btn btn-sm btn-primary">
+        {{ form_end(formArticle) }}
     </section>
 {% endblock %}

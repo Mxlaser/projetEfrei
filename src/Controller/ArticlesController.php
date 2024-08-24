@@ -79,7 +79,7 @@ class ArticlesController extends AbstractController
         return $this->render('articles/form-edit.html.twig', ['formArticle' => $formArticle->createView()]);
     }
 
-    #[Route('/articles/delete/{id}', name: 'article_delete')]
+    #[Route('/articles/delete/{id}', name: 'articles_delete')]
     public function delete(ManagerRegistry $doctrine, $id)
     {
         $article = $doctrine->getRepository(Articles::class)->find($id);

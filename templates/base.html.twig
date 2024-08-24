@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CinéCritique{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset ('css/style.css') }}">
 </head>
 <body>
@@ -29,7 +30,9 @@
     </nav>
 </header>
 
-{% block body %}{% endblock %}
+<main class = "main">
+    {% block body %}{% endblock %}
+</main>
 
 <footer>
     <p>&copy; 2024 CinéCritique. <a href="{{ path ('app_droits') }}">Tous droits réservés.</a></p>
