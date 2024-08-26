@@ -6,12 +6,15 @@
     <section class="py-5 container article-view">
         <div class="card mb-3">
             <div class="card-body">
-                <a href="{{ path ('articles_edit', {id: article.id})}}" class="edit-link">
-                    <i class="bi bi-pencil-square"></i>
-                </a>
-                <a href="{{ path ('articles_delete', {id: article.id})}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contenu ?')" class="delete-link">
-                    <i class="bi bi-trash-fill me-1"></i>
-                </a>
+                {# Vérifiez si l'utilisateur connecté est ADMIN ou s'il est l'auteur de l'article #}
+                {% if app.user and (app.user.role.nomRole == 'ADMIN' or app.user == article.user) %}
+                    <a href="{{ path('articles_edit', {id: article.id}) }}" class="edit-link">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a href="{{ path('articles_delete', {id: article.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contenu ?')" class="delete-link">
+                        <i class="bi bi-trash-fill me-1"></i>
+                    </a>
+                {% endif %}
                 <h2 class="card-title">{{ article.titre }}</h2>
                 <p class="card-text">{{ article.description }}</p>
             </div>
