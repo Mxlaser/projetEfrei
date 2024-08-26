@@ -28,16 +28,16 @@ class Articles
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $date_modification = null;
 
-    #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'articles')]
-    private Collection $categories;
+    // #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'articles')]
+    // private Collection $categories;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $user = null;
 
-    public function __construct()
-    {
-        $this->categories = new ArrayCollection();
-    }
+    // public function __construct()
+    // {
+    //     $this->categories = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {
@@ -92,29 +92,29 @@ class Articles
         return $this;
     }
 
-    /**
-     * @return Collection<int, Categories>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
+    // /**
+    //  * @return Collection<int, Categories>
+    //  */
+    // public function getCategories(): Collection
+    // {
+    //     return $this->categories;
+    // }
 
-    public function addCategory(Categories $category): static
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-        }
+    // public function addCategory(Categories $category): static
+    // {
+    //     if (!$this->categories->contains($category)) {
+    //         $this->categories->add($category);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeCategory(Categories $category): static
-    {
-        $this->categories->removeElement($category);
+    // public function removeCategory(Categories $category): static
+    // {
+    //     $this->categories->removeElement($category);
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getUser(): ?User
     {

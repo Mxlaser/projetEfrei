@@ -18,15 +18,15 @@ class Categories
     #[ORM\Column(length: 255)]
     private ?string $nom_categories = null;
 
-    #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'categories')]
-    private Collection $articles;
+    // #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'categories')]
+    // private Collection $articles;
 
     #[ORM\ManyToMany(targetEntity: Films::class, mappedBy: 'categories')]
     private Collection $films;
 
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        //$this->articles = new ArrayCollection();
         $this->films = new ArrayCollection();
     }
 
@@ -47,32 +47,32 @@ class Categories
         return $this;
     }
 
-    /**
-     * @return Collection<int, Articles>
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
+    // /**
+    //  * @return Collection<int, Articles>
+    //  */
+    // public function getArticles(): Collection
+    // {
+    //     return $this->articles;
+    // }
 
-    public function addArticle(Articles $article): static
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles->add($article);
-            $article->addCategory($this);
-        }
+    // public function addArticle(Articles $article): static
+    // {
+    //     if (!$this->articles->contains($article)) {
+    //         $this->articles->add($article);
+    //         $article->addCategory($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeArticle(Articles $article): static
-    {
-        if ($this->articles->removeElement($article)) {
-            $article->removeCategory($this);
-        }
+    // public function removeArticle(Articles $article): static
+    // {
+    //     if ($this->articles->removeElement($article)) {
+    //         $article->removeCategory($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Films>
