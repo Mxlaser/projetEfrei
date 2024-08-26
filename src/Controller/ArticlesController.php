@@ -22,7 +22,7 @@ class ArticlesController extends AbstractController
         ]);
     }
 
-    #[Route('/article/add', name: 'article_add')]
+    #[Route('/articles/add', name: 'articles_add')]
     public function add(ManagerRegistry $doctrine,  Request $request)
     {
         $user = $this->getUser();

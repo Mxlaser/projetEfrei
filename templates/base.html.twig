@@ -15,7 +15,7 @@
         <ul>
             <li><a href="{{ path ('app_home') }}">Accueil</a></li>
             <li><a href="{{ path ('app_articles') }}">Articles</a></li>
-            <li><a href="{{ path ('article_add') }}">Ajouter un article</a></li>
+            <li><a href="{{ path ('articles_add') }}">Ajouter un article</a></li>
             {% if app.user is null %}
                 <li><a href="{{ path ('app_login') }}">Connexion</a></li>
                 <li><a href="{{ path ('app_register') }}">Inscription</a></li>
