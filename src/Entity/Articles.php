@@ -34,6 +34,9 @@ class Articles
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Films $films = null;
+
     // public function __construct()
     // {
     //     $this->categories = new ArrayCollection();
@@ -124,6 +127,18 @@ class Articles
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFilms(): ?Films
+    {
+        return $this->films;
+    }
+
+    public function setFilms(?Films $films): static
+    {
+        $this->films = $films;
 
         return $this;
     }

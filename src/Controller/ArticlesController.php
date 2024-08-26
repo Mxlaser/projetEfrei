@@ -29,6 +29,7 @@ class ArticlesController extends AbstractController
         if (!$user instanceof User || (!$user->hasRole('ADMIN')) && !$user->hasRole('USER')) {
             return $this->redirectToRoute('app_login');
         }
+
         $entityManager = $doctrine->getManager();
         $article = new Articles();
 

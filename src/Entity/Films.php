@@ -16,47 +16,30 @@ class Films
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nom_films = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_sortie = null;
-
     #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'films')]
     private Collection $categories;
+
+    #[ORM\Column(length: 255)]
+    private ?string $original_title = null;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $release_date = null;
+
+    #[ORM\Column]
+    private ?int $imdb_id = null;
+
+    #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'films_id')]
+    private Collection $articles;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNomFilms(): ?string
-    {
-        return $this->nom_films;
-    }
-
-    public function setNomFilms(string $nom_films): static
-    {
-        $this->nom_films = $nom_films;
-
-        return $this;
-    }
-
-    public function getDateSortie(): ?\DateTimeInterface
-    {
-        return $this->date_sortie;
-    }
-
-    public function setDateSortie(\DateTimeInterface $date_sortie): static
-    {
-        $this->date_sortie = $date_sortie;
-
-        return $this;
     }
 
     /**
@@ -79,6 +62,72 @@ class Films
     public function removeCategory(Categories $category): static
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getOriginalTitle(): ?string
+    {
+        return $this->original_title;
+    }
+
+    public function setOriginalTitle(string $original_title): static
+    {
+        $this->original_title = $original_title;
+
+        return $this;
+    }
+
+    public function getReleaseDate(): ?\DateTimeImmutable
+    {
+        return $this->release_date;
+    }
+
+    public function setReleaseDate(\DateTimeImmutable $release_date): static
+    {
+        $this->release_date = $release_date;
+
+        return $this;
+    }
+
+    public function getImdbId(): ?int
+    {
+        return $this->imdb_id;
+    }
+
+    public function setImdbId(int $imdb_id): static
+    {
+        $this->imdb_id = $imdb_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Articles>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): static
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setFilms($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getFilms() === $this) {
+                $article->setFilms(null);
+            }
+        }
 
         return $this;
     }
