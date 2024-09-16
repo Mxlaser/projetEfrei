@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Articles;
+use App\Entity\Films;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +15,12 @@ class ArticlesType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('description');
+            ->add('description')
+            ->add('films', EntityType::class, [
+                'class' => Films::class,
+                'choice_label' => 'originalTitle',  // ou un autre champ à afficher comme label
+                'placeholder' => 'Choisir un film',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

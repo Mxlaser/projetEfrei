@@ -424,3 +424,109 @@ input[type="text"], textarea {
         padding: 15px;
     }
 }
+
+/**************************************/
+
+/* Styles pour le menu déroulant */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur */
+    transition: border-color 0.3s;
+}
+
+/* Ajouter un effet de survol pour le menu déroulant */
+select:hover {
+    border-color: #333;
+}
+
+/* Styles pour le champ de recherche dans le formulaire */
+input[type="search"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur */
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+/* Ajouter un effet de survol pour le champ de recherche */
+input[type="search"]:hover {
+    border-color: #333;
+}
+
+/*****************************************/
+
+/* Styles pour la liste des films */
+.films-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.film-item {
+    flex: 1 1 calc(25% - 20px); /* Ajustez la largeur selon le nombre de colonnes désiré */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.film-item a {
+    text-decoration: none;
+    color: #333;
+}
+
+.film-poster {
+    width: 50%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.film-title {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+/* Styles pour les résultats de recherche */
+.search-results {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.search-item {
+    flex: 1 1 calc(25% - 20px); /* Ajustez la largeur selon le nombre de colonnes désiré */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.search-item a {
+    text-decoration: none;
+    color: #333;
+}
+
+.search-poster {
+    width: 70%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-title {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+}

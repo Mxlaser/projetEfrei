@@ -28,8 +28,11 @@ class Films
     #[ORM\Column]
     private ?int $imdb_id = null;
 
-    #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'films_id')]
+    #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'films')]
     private Collection $articles;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $poster_path = null;
 
     public function __construct()
     {
@@ -128,6 +131,18 @@ class Films
                 $article->setFilms(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPosterPath(): ?string
+    {
+        return $this->poster_path;
+    }
+
+    public function setPosterPath(string $poster_path): static
+    {
+        $this->poster_path = $poster_path;
 
         return $this;
     }

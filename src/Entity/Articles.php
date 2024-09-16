@@ -34,7 +34,11 @@ class Articles
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
+    // #[ORM\ManyToOne(inversedBy: 'articles')]
+    // private ?Films $films = null;
+
+    #[ORM\ManyToOne(targetEntity: Films::class, inversedBy: 'articles')]
+    #[ORM\JoinColumn(name: 'films_id', referencedColumnName: 'id')]
     private ?Films $films = null;
 
     // public function __construct()

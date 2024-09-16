@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des films{% endblock %}
+
+{% block body %}
+    <h1>Liste des films</h1>
+
+    <form method="get" action="{{ path('app_films_search') }}">
+        <input type="text" name="query" placeholder="Rechercher un film...">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <ul class="films-list">
+        {% for film in films %}
+            <li class="film-item">
+                <a href="{{ path('films_show', {'id': film.id}) }}">
+                    <img src="https://image.tmdb.org/t/p/w500{{ film.posterPath }}" alt="{{ film.originalTitle }}" class="film-poster">
+                    <span class="film-title">{{ film.originalTitle }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if search_results is defined %}
+        <h2>Résultats de recherche</h2>
+        <ul class="search-results">
+            {% for result in search_results %}
+                <li class="search-item">
+                    <a href="{{ path('films_show', {'id': result.id}) }}">
+                        <img src="https://image.tmdb.org/t/p/w500{{ result.poster_path }}" alt="{{ result.title }}" class="search-poster">
+                        <span class="search-title">{{ result.title }}</span>
+                    </a>
+                    <form method="post" action="{{ path('app_films_add') }}">
+                        <input type="hidden" name="tmdb_id" value="{{ result.id }}">
+                        <button type="submit">Ajouter</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

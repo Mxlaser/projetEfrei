@@ -9,7 +9,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h2 class="card-title">{{ articles.titre }}</h2>
-                    <p class="card-text">{{ articles.description|slice(0, 150) ~ '...' }}</p>
+                    <p class="card-text">{{ articles.description|slice(0, 50) ~ '...' }}</p>
                     <a href="{{ path ('articles_show', {id: articles.id})}}" class="card-link">Lire article</a>
                 </div>
             </div>
