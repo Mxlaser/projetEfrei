@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CinéCritique{% endblock %}
+
+{% block body %}
+    <h2 class="profile-title">Mon Profil</h2>
+
+    {% if user %}
+        <div class="profile-card">
+            <h3>{{ user.nom }} {{ user.prenom }}</h3>
+            <p>Email : {{ user.email }}</p>
+            <!-- Ajoute d'autres informations ici -->
+            <p>Date d'inscription : {{ user.dateCreation|date('d/m/Y') }}</p>
+        </div>
+    {% else %}
+        <p>Aucun utilisateur trouvé.</p>
+    {% endif %}
+{% endblock %}

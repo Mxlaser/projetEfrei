@@ -3,20 +3,26 @@
 {% block title %}Détails du film{% endblock %}
 
 {% block body %}
-    <h1>{{ films.originalTitle }}</h1>
-    <p>Date de sortie : {{ films.releaseDate|date('d/m/Y') }}</p>
-    <p>ID IMDB : {{ films.imdbId }}</p>
+    <div class="film-details">
+        <h1 class="title">{{ films.originalTitle }}</h1>
+        <p class="film-info">Date de sortie : {{ films.releaseDate|date('d/m/Y') }}</p>
+        <p class="film-info">ID IMDB : {{ films.imdbId }}</p>
 
-    <h2>Articles en lien avec ce film</h2>
-    {% if articles|length > 0 %}
-        <ul>
-            {% for article in articles %}
-                <li>{{ article.titre }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucun article n'est lié à ce film.</p>
-    {% endif %}
-    
-    <a href="{{ path('app_films') }}">Retour à la liste des films</a>
+        <h2 class="articles-heading">Articles en lien avec ce film</h2>
+        {% if articles|length > 0 %}
+            <ul class="article-list">
+                {% for article in articles %}
+                    <li class="article-item">
+                        <a href="{{ path('articles_show', {'id': article.id}) }}" class="article-link">
+                            {{ article.titre }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-article">Aucun article n'est lié à ce film.</p>
+        {% endif %}
+        
+        <a href="{{ path('app_films') }}" class="back-link">Retour à la liste des films</a>
+    </div>
 {% endblock %}

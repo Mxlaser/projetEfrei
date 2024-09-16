@@ -26,10 +26,8 @@
         <ul class="search-results">
             {% for result in search_results %}
                 <li class="search-item">
-                    <a href="{{ path('films_show', {'id': result.id}) }}">
-                        <img src="https://image.tmdb.org/t/p/w500{{ result.poster_path }}" alt="{{ result.title }}" class="search-poster">
-                        <span class="search-title">{{ result.title }}</span>
-                    </a>
+                    <img src="https://image.tmdb.org/t/p/w500{{ result.poster_path }}" alt="{{ result.title }}" class="search-poster">
+                    <span class="search-title">{{ result.title }}</span>
                     <form method="post" action="{{ path('app_films_add') }}">
                         <input type="hidden" name="tmdb_id" value="{{ result.id }}">
                         <button type="submit">Ajouter</button>

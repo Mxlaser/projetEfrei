@@ -465,6 +465,26 @@ input[type="search"]:hover {
 
 /*****************************************/
 
+button[type="submit"] {
+    background-color: #333; /* Couleur de fond verte */
+    color: white; /* Couleur du texte */
+    padding: 10px 20px; /* Espacement interne (padding) */
+    border: none; /* Enlever la bordure */
+    border-radius: 5px; /* Bordures arrondies */
+    cursor: pointer; /* Curseur en forme de main au survol */
+    font-size: 16px; /* Taille de la police */
+    transition: background-color 0.3s ease; /* Animation douce pour le changement de couleur */
+}
+
+button[type="submit"]:hover {
+    background-color: #555; /* Couleur de fond au survol */
+}
+
+button[type="submit"]:focus {
+    outline: none; /* Enlever le contour par défaut au focus */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Ombre légère au focus */
+}
+
 /* Styles pour la liste des films */
 .films-list {
     list-style: none;
@@ -475,7 +495,7 @@ input[type="search"]:hover {
 }
 
 .film-item {
-    flex: 1 1 calc(25% - 20px); /* Ajustez la largeur selon le nombre de colonnes désiré */
+    flex: 0 1 calc(25% - 20px); /* Ajustez la largeur selon le nombre de colonnes désiré */
     box-sizing: border-box;
     text-align: center;
 }
@@ -486,7 +506,7 @@ input[type="search"]:hover {
 }
 
 .film-poster {
-    width: 50%;
+    width: 70%;
     height: auto;
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -508,7 +528,7 @@ input[type="search"]:hover {
 }
 
 .search-item {
-    flex: 1 1 calc(25% - 20px); /* Ajustez la largeur selon le nombre de colonnes désiré */
+    flex: 0 1 calc(25% - 20px); /* Ajustez la largeur selon le nombre de colonnes désiré */
     box-sizing: border-box;
     text-align: center;
 }
@@ -529,4 +549,74 @@ input[type="search"]:hover {
     display: block;
     margin-top: 10px;
     font-size: 1rem;
+}
+
+/**********************************/
+
+.film-details {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.film-info {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.articles-heading {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #444;
+}
+
+.article-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.article-item {
+    margin-bottom: 10px;
+}
+
+.article-link {
+    text-decoration: none;
+    font-size: 1.1em;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+.article-link:hover {
+    color: #0056b3;
+}
+
+.no-article {
+    font-size: 1em;
+    color: #888;
+    margin-top: 10px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.back-link:hover {
+    background-color: #555;
 }

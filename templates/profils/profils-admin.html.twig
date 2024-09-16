@@ -3,14 +3,18 @@
 {% block title %}CinéCritique{% endblock %}
 
 {% block body %}
-    <h2 class="profile-title">Gestion du profil</h2>
+    <h2 class="profile-title">Gestion des profils</h2>
 
     {% if user is not empty %}
         <div class="profile-cards">
             {% for users in user %}
                 <div class="profile-card">
                     <h3>{{ users.nom }} {{ users.prenom }}</h3>
-                    <!-- Tu peux ajouter d'autres informations ici si nécessaire -->
+                    <p>Email : {{ users.email }}</p>
+                    <p>Date d'inscription : {{ users.dateCreation|date('d/m/Y') }}</p>
+                    <a href="{{ path('profils_delete', {id: users.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contenu ?')" class="delete-link">
+                        <i class="bi bi-trash-fill me-1"></i>
+                    </a>
                 </div>
             {% endfor %}
         </div>
