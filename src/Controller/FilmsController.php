@@ -50,6 +50,17 @@ class FilmsController extends AbstractController
 
             $data = $response->toArray();
             $searchResults = $data['results'] ?? [];
+
+            // Récupérer les films déjà présents dans la base de données
+            $existingFilms = $doctrine->getRepository(Films::class)->findAll();
+            $existingTmdbIds = array_map(function ($film) {
+                return $film->getImdbId(); // Utilise `getImdbId()` si tu enregistres le `tmdb_id` ici
+            }, $existingFilms);
+
+            // Filtrer les résultats pour enlever les films déjà présents dans la base de données
+            $searchResults = array_filter($searchResults, function ($result) use ($existingTmdbIds) {
+                return !in_array($result['id'], $existingTmdbIds);
+            });
         }
 
         return $this->render('films/films.html.twig', [

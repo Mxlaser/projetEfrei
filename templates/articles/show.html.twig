@@ -20,31 +20,33 @@
             </div>
         </div>
 
-        <div class="comment-form">
-            {{ form_start(formCommentaires) }}
-            {{ form_widget(formCommentaires) }}
-            <button type="submit">Ajouter un commentaire</button>
-            {{ form_end(formCommentaires) }}
-        </div>
+        {% if app.user %}
+            <div class="comment-form">
+                {{ form_start(formCommentaires) }}
+                {{ form_widget(formCommentaires) }}
+                <button type="submit">Ajouter un commentaire</button>
+                {{ form_end(formCommentaires) }}
+            </div>
+        {% endif %}
 
         <div class="commentaire-section">
             <h3>Commentaires</h3>
             {% for commentaire in article.commentaires %}
-                <div class="comment">
+                <div class="comment-body">
                     {% if article.user %}
-                        <p>Créé par {{ commentaire.user.prenom }} {{ commentaire.user.nom }}, le {{ article.getDateCreation() | date('d/m/Y') }}</p>
+                        <p class="comment-author">Écrit par {{ commentaire.user.prenom }} {{ commentaire.user.nom }}, le {{ article.getDateCreation() | date('d/m/Y') }}</p>
                     {% else %}
-                        <p>Créé par un utilisateur supprimé, le {{ article.getDateCreation() | date('d/m/Y') }}</p>
+                        <p class="comment-author">Écrit par un utilisateur supprimé, le {{ article.getDateCreation() | date('d/m/Y') }}</p>
                     {% endif %}
-                    <p>{{ commentaire.texte }}</p>
+                    <p class="comment-text">{{ commentaire.texte }}</p>
                     {% if app.user is not null and app.user.role is not null and (app.user.role.nomRole == 'ADMIN') or commentaire.user == app.user %}
-                        <a href="{{ path('commentaires_delete', { 'id': commentaire.id }) }}" class="delete-link">
+                        <a href="{{ path('commentaires_delete', { 'id': commentaire.id }) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contenu ?')" class="delete-com">
                             <i class="bi bi-trash-fill me-1"></i>
                         </a>
                     {% endif %}
                 </div>
             {% else %}
-                <p>Aucun commentaire pour cet Article</p>
+                <p>Aucun commentaire pour cet article</p>
             {% endfor %}
         </div>    
     </section>

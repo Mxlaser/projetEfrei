@@ -620,3 +620,61 @@ button[type="submit"]:focus {
 .back-link:hover {
     background-color: #555;
 }
+
+/***********************************************************************************/
+
+/* Styles pour la section des commentaires */
+.commentaire-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.commentaire-section h3 {
+    font-size: 2.3rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Style pour chaque commentaire */
+.comment-body {
+    padding: 30px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+/* Texte de l'auteur et la date */
+.comment-author {
+    font-size: 0.9rem;
+    color: #777;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+/* Texte du commentaire */
+.comment-text {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* Suppression des bordures pour le dernier commentaire */
+.comment-body:last-child {
+    border-bottom: none;
+}
+
+/* Liens pour supprimer un commentaire (admin ou utilisateur) */
+.delete-com {
+    color: #dc3545;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.delete-com:hover {
+    color: #b21f2d;
+}
+
+/***********************************************************************************/

@@ -16,9 +16,6 @@ class Films
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'films')]
-    private Collection $categories;
-
     #[ORM\Column(length: 255)]
     private ?string $original_title = null;
 
@@ -36,37 +33,12 @@ class Films
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection<int, Categories>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Categories $category): static
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Categories $category): static
-    {
-        $this->categories->removeElement($category);
-
-        return $this;
     }
 
     public function getOriginalTitle(): ?string

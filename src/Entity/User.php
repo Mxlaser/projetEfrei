@@ -46,10 +46,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Role $role = null;
 
-    #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'user', cascade: ['remove'])]
     private Collection $articles;
 
-    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'user', cascade: ['remove'])]
     private Collection $commentaires;
 
     public function __construct()
