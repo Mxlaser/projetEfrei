@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use App\Entity\User;
+use App\Entity\Commentaires;
+use App\Form\CommentairesType;
 use App\Form\ArticlesType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,10 +57,25 @@ class ArticlesController extends AbstractController
     }
 
     #[Route('/articles/show/{id}', name: 'articles_show')]
-    public function show(ManagerRegistry $doctrine, $id)
+    public function show(ManagerRegistry $doctrine, Request $request, $id)
     {
+        $user = $this->getUser();
         $article = $doctrine->getRepository(Articles::class)->find($id);
-        return $this->render('articles/show.html.twig', ["article" => $article]);
+
+        $commentaire = new Commentaires();
+        $formCommentaires = $this->createForm(CommentairesType::class, $commentaire);
+        $formCommentaires->handleRequest($request);
+
+        if ($formCommentaires->isSubmitted() && $formCommentaires->isValid()) {
+            $commentaire->setArticles(($article));
+            $commentaire->setUser($user);
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('articles_show', ['id' => $id]);
+        }
+        return $this->render('articles/show.html.twig', ["article" => $article, 'formCommentaires' => $formCommentaires->createView()]);
     }
 
     #[Route('/articles/edit/{id}', name: 'articles_edit')]

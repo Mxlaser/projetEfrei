@@ -49,9 +49,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'user')]
     private Collection $articles;
 
+    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'user')]
+    private Collection $commentaires;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,5 +222,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function hasRole(string $roleName): bool
     {
         return $this->role !== null && $this->role->getNomRole() === $roleName;
+    }
+
+    /**
+     * @return Collection<int, Commentaires>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaires $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaires $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getUser() === $this) {
+                $commentaire->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

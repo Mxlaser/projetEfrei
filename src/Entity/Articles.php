@@ -41,6 +41,14 @@ class Articles
     #[ORM\JoinColumn(name: 'films_id', referencedColumnName: 'id')]
     private ?Films $films = null;
 
+    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'articles')]
+    private Collection $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
+
     // public function __construct()
     // {
     //     $this->categories = new ArrayCollection();
@@ -143,6 +151,36 @@ class Articles
     public function setFilms(?Films $films): static
     {
         $this->films = $films;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaires>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaires $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setArticles($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaires $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getArticles() === $this) {
+                $commentaire->setArticles(null);
+            }
+        }
 
         return $this;
     }

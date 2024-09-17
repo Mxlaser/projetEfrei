@@ -18,6 +18,34 @@
                 <h2 class="card-title">{{ article.titre }}</h2>
                 <p class="card-text">{{ article.description }}</p>
             </div>
-        </div>        
+        </div>
+
+        <div class="comment-form">
+            {{ form_start(formCommentaires) }}
+            {{ form_widget(formCommentaires) }}
+            <button type="submit">Ajouter un commentaire</button>
+            {{ form_end(formCommentaires) }}
+        </div>
+
+        <div class="commentaire-section">
+            <h3>Commentaires</h3>
+            {% for commentaire in article.commentaires %}
+                <div class="comment">
+                    {% if article.user %}
+                        <p>Créé par {{ commentaire.user.prenom }} {{ commentaire.user.nom }}, le {{ article.getDateCreation() | date('d/m/Y') }}</p>
+                    {% else %}
+                        <p>Créé par un utilisateur supprimé, le {{ article.getDateCreation() | date('d/m/Y') }}</p>
+                    {% endif %}
+                    <p>{{ commentaire.texte }}</p>
+                    {% if app.user is not null and app.user.role is not null and (app.user.role.nomRole == 'ADMIN') or commentaire.user == app.user %}
+                        <a href="{{ path('commentaires_delete', { 'id': commentaire.id }) }}" class="delete-link">
+                            <i class="bi bi-trash-fill me-1"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p>Aucun commentaire pour cet Article</p>
+            {% endfor %}
+        </div>    
     </section>
 {% endblock %}
