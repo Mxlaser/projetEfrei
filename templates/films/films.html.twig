@@ -4,11 +4,12 @@
 
 {% block body %}
     <h1>Liste des films</h1>
-
+    {% if app.user and (app.user.role.nomRole == 'USER' or app.user.role.nomRole == 'ADMIN') %}
     <form method="get" action="{{ path('app_films_search') }}">
         <input type="text" name="query" placeholder="Rechercher un film...">
         <button type="submit">Rechercher</button>
     </form>
+    {% endif %}
 
     <ul class="films-list">
         {% for film in films %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Films;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,6 +42,11 @@ class FilmsController extends AbstractController
     #[Route('/films/search', name: 'app_films_search')]
     public function search(Request $request, ManagerRegistry $doctrine): Response
     {
+        $user = $this->getUser();
+        if (!$user instanceof User || (!$user->hasRole('ADMIN')) && !$user->hasRole('USER')) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $query = $request->query->get('query');
 
         $searchResults = [];
@@ -72,6 +78,11 @@ class FilmsController extends AbstractController
     #[Route('/films/add', name: 'app_films_add', methods: ['POST'])]
     public function add(Request $request, ManagerRegistry $doctrine): Response
     {
+        $user = $this->getUser();
+        if (!$user instanceof User || (!$user->hasRole('ADMIN')) && !$user->hasRole('USER')) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $tmdbId = $request->request->get('tmdb_id');
         $apiKey = $this->getParameter('tmdb_api_key');
 
