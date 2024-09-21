@@ -416,14 +416,14 @@ input[type="text"], textarea {
 
 /***********************************/
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .profile-title {
         font-size: 1.5rem;
     }
     .profile-card {
         padding: 15px;
     }
-}
+} */
 
 /**************************************/
 
