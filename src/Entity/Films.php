@@ -98,7 +98,6 @@ class Films
     public function removeArticle(Articles $article): static
     {
         if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
             if ($article->getFilms() === $this) {
                 $article->setFilms(null);
             }

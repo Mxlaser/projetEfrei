@@ -28,14 +28,8 @@ class Articles
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $date_modification = null;
 
-    // #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'articles')]
-    // private Collection $categories;
-
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $user = null;
-
-    // #[ORM\ManyToOne(inversedBy: 'articles')]
-    // private ?Films $films = null;
 
     #[ORM\ManyToOne(targetEntity: Films::class, inversedBy: 'articles')]
     #[ORM\JoinColumn(name: 'films_id', referencedColumnName: 'id')]
@@ -48,11 +42,6 @@ class Articles
     {
         $this->commentaires = new ArrayCollection();
     }
-
-    // public function __construct()
-    // {
-    //     $this->categories = new ArrayCollection();
-    // }
 
     public function getId(): ?int
     {
@@ -107,30 +96,6 @@ class Articles
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, Categories>
-    //  */
-    // public function getCategories(): Collection
-    // {
-    //     return $this->categories;
-    // }
-
-    // public function addCategory(Categories $category): static
-    // {
-    //     if (!$this->categories->contains($category)) {
-    //         $this->categories->add($category);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeCategory(Categories $category): static
-    // {
-    //     $this->categories->removeElement($category);
-
-    //     return $this;
-    // }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -176,7 +141,6 @@ class Articles
     public function removeCommentaire(Commentaires $commentaire): static
     {
         if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
             if ($commentaire->getArticles() === $this) {
                 $commentaire->setArticles(null);
             }

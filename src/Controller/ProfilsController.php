@@ -13,7 +13,6 @@ class ProfilsController extends AbstractController
     #[Route('/profils/admin', name: 'profils_admin')]
     public function admin(ManagerRegistry $doctrine): Response
     {
-        // Récupère tous les utilisateurs
         $users = $doctrine->getRepository(User::class)->findAll();
 
         return $this->render('profils/profils-admin.html.twig', [

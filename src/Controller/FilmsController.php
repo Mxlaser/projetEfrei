@@ -32,7 +32,6 @@ class FilmsController extends AbstractController
     #[Route('/films/show/{id}', name: 'films_show', requirements: ['id' => '\d+'])]
     public function show(Films $films): Response
     {
-        // Rendre la vue avec les détails du film sélectionné et ses articles
         return $this->render('films/show.html.twig', [
             'films' => $films,
             'articles' => $films->getArticles(),
@@ -57,13 +56,11 @@ class FilmsController extends AbstractController
             $data = $response->toArray();
             $searchResults = $data['results'] ?? [];
 
-            // Récupérer les films déjà présents dans la base de données
             $existingFilms = $doctrine->getRepository(Films::class)->findAll();
             $existingTmdbIds = array_map(function ($film) {
-                return $film->getImdbId(); // Utilise `getImdbId()` si tu enregistres le `tmdb_id` ici
+                return $film->getImdbId();
             }, $existingFilms);
 
-            // Filtrer les résultats pour enlever les films déjà présents dans la base de données
             $searchResults = array_filter($searchResults, function ($result) use ($existingTmdbIds) {
                 return !in_array($result['id'], $existingTmdbIds);
             });
@@ -86,7 +83,6 @@ class FilmsController extends AbstractController
         $tmdbId = $request->request->get('tmdb_id');
         $apiKey = $this->getParameter('tmdb_api_key');
 
-        // Fetch movie details from TMDb API
         $response = $this->client->request('GET', "https://api.themoviedb.org/3/movie/{$tmdbId}?api_key={$apiKey}");
         $movieData = $response->toArray();
 
@@ -94,10 +90,8 @@ class FilmsController extends AbstractController
         $film = new Films();
         $film->setOriginalTitle($movieData['title']);
         $film->setReleaseDate(new \DateTimeImmutable($movieData['release_date']));
-        $film->setImdbId($movieData['id']); // Or set the TMDB ID instead of IMDb ID if that's what you want
-        // $film->setPosterPath($request->request->get('posterPath'));
+        $film->setImdbId($movieData['id']); 
 
-        // Retrieve poster path, or set it to null if not available
         $posterPath = $movieData['poster_path'] ?? null;
         $film->setPosterPath($posterPath);
 

@@ -18,7 +18,7 @@ class ArticlesType extends AbstractType
             ->add('description')
             ->add('films', EntityType::class, [
                 'class' => Films::class,
-                'choice_label' => 'originalTitle',  // ou un autre champ à afficher comme label
+                'choice_label' => 'originalTitle',
                 'placeholder' => 'Choisir un film',
             ]);
     }

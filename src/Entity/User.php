@@ -210,7 +210,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeArticle(Articles $article): static
     {
         if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
             if ($article->getUser() === $this) {
                 $article->setUser(null);
             }
@@ -245,7 +244,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCommentaire(Commentaires $commentaire): static
     {
         if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
             if ($commentaire->getUser() === $this) {
                 $commentaire->setUser(null);
             }

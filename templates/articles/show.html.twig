@@ -6,7 +6,6 @@
     <section class="py-5 container article-view">
         <div class="card mb-3">
             <div class="card-body">
-                {# Vérifiez si l'utilisateur connecté est ADMIN ou s'il est l'auteur de l'article #}
                 {% if app.user and (app.user.role.nomRole == 'ADMIN' or app.user == article.user) %}
                     <a href="{{ path('articles_edit', {id: article.id}) }}" class="edit-link">
                         <i class="bi bi-pencil-square"></i>

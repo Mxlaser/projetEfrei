@@ -9,7 +9,6 @@
         <div class="profile-card">
             <h3>{{ user.nom }} {{ user.prenom }}</h3>
             <p>Email : {{ user.email }}</p>
-            <!-- Ajoute d'autres informations ici -->
             <p>Date d'inscription : {{ user.dateCreation|date('d/m/Y') }}</p>
         </div>
     {% else %}

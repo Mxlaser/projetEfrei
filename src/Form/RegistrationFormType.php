@@ -51,7 +51,6 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                     new Regex([
@@ -70,8 +69,8 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('role', ChoiceType::class, [
                 'choices' => $choices,
-                'multiple' => false, // Permet à l'utilisateur de sélectionner un seul rôle
-                'expanded' => false, // Affiche les rôles comme des cases à cocher plutôt qu'une liste déroulante
+                'multiple' => false,
+                'expanded' => false,
             ]);
     }
 
